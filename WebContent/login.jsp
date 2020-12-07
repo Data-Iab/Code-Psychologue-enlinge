@@ -1,29 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Login</title>
 </head>
-<body>
+<link href="loginCSS.css" rel="stylesheet" type="text/css"><body>
 <div align = "center">
-	<form action="login" method="post">
+	<form class = login action="login" method="post">
 		<table>
 			<tr>
-				<td align ="center">Nom d'utilisateur</td>
+				<td><input type="text" name="nom" placeholder="Nom d'utilisateur"></td>
 			</tr>
 			<tr>
-				<td><input type="text" name="nom"></td>
+				<td><input type="password" name="mot de passe" placeholder="Password"></td>
 			</tr>
 			<tr>
-				<td align ="center">Mot de passe</td>
-			</tr>
-			<tr>
-				<td><input type="password" name="mot de passe"></td>
-			</tr>
-			<tr>
-				<td align ="center"><input type="submit" value="Login"></td>
+				<td align ="center"><button type="submit" value="Login">login</button></td>
 			</tr>
 		</table>
 	</form>

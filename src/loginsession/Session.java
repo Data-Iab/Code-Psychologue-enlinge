@@ -1,9 +1,11 @@
 package loginsession;
 
+import java.util.*; 
 public class Session {
 	private String nom;
 	private String passe;
 	private String typeUser;
+	
 	public void affectType(String typeUser) {
 		this.typeUser = typeUser;
 	}

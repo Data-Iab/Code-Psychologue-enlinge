@@ -4,6 +4,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+
 import loginsession.*;
 public class DB {
 	private String dbUrl = "jdbc:mysql://localhost:3306/userdb?useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
@@ -47,5 +49,32 @@ public class DB {
 			e.printStackTrace();
 		}
 		return status;
+	}
+	public void question_utilisateur(Session session, List<Question> userquestion)
+	{
+		boolean status = false;
+
+		loadDriver(dbDriver);
+		Connection con = getConnection();
+		String sql = "SELECT * FROM userdb.questions q INNER JOIN userdb.formulaires f ON f.id_formulaire=q.id_formulaire WHERE f.nom=?";
+		PreparedStatement ps;
+		try {
+		ps = con.prepareStatement(sql);
+		ps.setString(1, session.returnNom());
+		ResultSet rs = ps.executeQuery();
+		status = rs.next();
+		while(status) {
+			Question question = new Question();
+			question.affectIdQuestion(rs.getInt("id_question"));
+			question.affectIdFormulaire(rs.getInt("id_formulaire"));
+			question.affectReponse(rs.getBoolean("reponse"));
+			question.affectQuestion(rs.getString("question"));
+
+			userquestion.add(question);
+			status = rs.next();
+		}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

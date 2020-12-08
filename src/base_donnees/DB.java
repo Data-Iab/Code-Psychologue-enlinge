@@ -52,11 +52,11 @@ public class DB {
 	}
 	public void question_utilisateur(Session session, List<Question> userquestion)
 	{
-		boolean status = false;
+		boolean status;
 
 		loadDriver(dbDriver);
 		Connection con = getConnection();
-		String sql = "SELECT * FROM userdb.questions q INNER JOIN userdb.formulaires f ON f.id_formulaire=q.id_formulaire WHERE f.nom=?";
+		String sql = "SELECT * FROM userdb.questions q INNER JOIN userdb.formulaires f ON f.id_formulaire=q.id_formulaire WHERE f.nom=? AND f.etat=1";
 		PreparedStatement ps;
 		try {
 		ps = con.prepareStatement(sql);

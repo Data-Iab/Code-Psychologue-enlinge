@@ -22,6 +22,7 @@ button:hover {
   background-color: black;
   color: white;
 }
+
 body {
  background-image: url("1.gif");
  background-attachment: fixed;
@@ -29,6 +30,9 @@ body {
  background-position: center;
  background-size: cover;
  background-color: white;
+}
+.error{
+	color : red;
 }
 
 .login {

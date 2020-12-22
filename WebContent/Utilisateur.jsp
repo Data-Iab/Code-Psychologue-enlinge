@@ -9,7 +9,7 @@
 </head>
 <link href="UtilisateurCSS.css" rel="stylesheet" type="text/css">
 <body>
-	<form class=envoie action="envoie" method="post">
+	<form action="utilisateur" method="post">
 		<br>
 		<br>
 		<h1 align=center>Veuillez répondre aux questions suivantes</h1>
@@ -23,14 +23,14 @@
 						<th>Réponse</th>
 					</tr>
 				</thead>
-
 				<tbody>
 					<c:forEach items="${userquestion}" var="question">
 						<tr>
 							<td><c:out value="${question.returnQuestion()}" /></td>
-							<td><select name="reponse" class="dropbtn">
-									<option value="false">Oui</option>
-									<option value="true">Non</option>
+							<input type="hidden" name="idQuestion" value="${question.returnIdQuestion()}"/>
+							<td ><select name="reponse"  class="dropbtn">
+									<option value="1">Oui</option>
+									<option value="0">Non</option>
 							</select></td>
 						</tr>
 					</c:forEach>
@@ -38,7 +38,7 @@
 				<thead>
 					<tr>
 						<td></td>
-						<th align=center><button type="submit" value="Login">Envoyer</button></th>
+						<th align=center><button type="submit">Envoyer</button></th>
 					</tr>
 				</thead>
 			</table>

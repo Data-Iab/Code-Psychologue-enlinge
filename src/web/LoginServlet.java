@@ -14,7 +14,6 @@ import loginsession.*;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String nom = request.getParameter("nom");
 		String passe = request.getParameter("mot de passe");
@@ -30,13 +29,22 @@ public class LoginServlet extends HttpServlet {
 		else if(session.returnType().equals("Utilisateur")) {
 			  List<Question> userquestion = new ArrayList<Question>();
 			  connexion_db.question_utilisateur(session, userquestion);
-			  request.setAttribute("userquestion", userquestion);
-			  request.setAttribute("utilisateur", session.returnNom());
-			  RequestDispatcher rst = request.getRequestDispatcher("Utilisateur.jsp");
-			  rst.forward(request, response);
+			  if(userquestion.size() == 0)
+				  response.sendRedirect("noQuestions.jsp");
+			  else {
+				  request.setAttribute("userquestion", userquestion);
+				  request.setAttribute("utilisateur", session.returnNom());
+				  RequestDispatcher rst = request.getRequestDispatcher("Utilisateur.jsp");
+				  rst.forward(request, response);
+			  }
 		}
 		else if(session.returnType().equals("RH")) {
-			response.sendRedirect("RH.jsp");
+			List<Formulaire> RH = new ArrayList<Formulaire>();
+			connexion_db.liste_formulaire(session,RH);
+			request.setAttribute("RH", RH);
+			RequestDispatcher rst = request.getRequestDispatcher("RH.jsp");
+			rst.forward(request, response);
+			
 		}
 	}
 	else {

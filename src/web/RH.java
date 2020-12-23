@@ -11,28 +11,26 @@ import base_donnees.DB;
 
 @WebServlet("/RH")
 public class RH extends HttpServlet {
-	
-	
-protected void doPost(HttpServletRequest request,  HttpServletResponse etats) throws ServletException, IOException {
 
-	
-String[] etatExtraits = request.getParameterValues("etat");
+	protected void doPost(HttpServletRequest request, HttpServletResponse etats) throws ServletException, IOException {
 
-String[] id_formulaireExtraits = request.getParameterValues("id_formulaire");
+		String[] etatExtraits = request.getParameterValues("etat");
 
-int[] id_formulaire = new int[id_formulaireExtraits.length];
+		String[] id_formulaireExtraits = request.getParameterValues("id_formulaire");
 
-int[] etat = new int[etatExtraits.length];
+		int[] id_formulaire = new int[id_formulaireExtraits.length];
 
-for(int i =0 ;i<id_formulaireExtraits.length;i++) {
-    id_formulaire[i] = Integer.parseInt(id_formulaireExtraits[i]);
-    etat[i] = Integer.parseInt(etatExtraits[i]);
-   }
-DB db_connexion = new DB();
+		int[] etat = new int[etatExtraits.length];
 
-db_connexion.updateliste_formulaire(id_formulaire, etat);	
+		for (int i = 0; i < id_formulaireExtraits.length; i++) {
+			id_formulaire[i] = Integer.parseInt(id_formulaireExtraits[i]);
+			etat[i] = Integer.parseInt(etatExtraits[i]);
+		}
+		DB db_connexion = new DB();
 
-etats.sendRedirect("EnvoieSucces.jsp");
-}
+		db_connexion.updateliste_formulaire(id_formulaire, etat);
+
+		etats.sendRedirect("EnvoieSucces.jsp");
+	}
 
 }

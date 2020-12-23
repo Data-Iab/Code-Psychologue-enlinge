@@ -47,15 +47,19 @@ public class LoginServlet extends HttpServlet {
 					RequestDispatcher rst = request.getRequestDispatcher("Utilisateur.jsp");
 					rst.forward(request, response);
 				}
-			} else if (session.returnType().equals("RH")) {
+			} 
+			
+			
+			else if (session.returnType().equals("RH")) {
 				List<Formulaire> RH = new ArrayList<Formulaire>();
-				connexion_db.liste_formulaire(session, RH);
-				for(Formulaire f:RH) {
-					System.out.println(f.getpsy());
+				connexion_db.liste_formulaire(RH);
+				if (RH.size() == 0)
+					response.sendRedirect("noFormulaire.jsp");
+				else {
+					request.setAttribute("RH", RH);
+					RequestDispatcher rst = request.getRequestDispatcher("RH.jsp");
+					rst.forward(request, response);
 				}
-				request.setAttribute("RH", RH);
-				RequestDispatcher rst = request.getRequestDispatcher("RH.jsp");
-				rst.forward(request, response);
 
 			}
 		} else {

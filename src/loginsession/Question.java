@@ -30,4 +30,5 @@ public class Question {
 	public void affectReponse(boolean reponse) {
 		this.reponse =reponse;
 	}
+	
 }

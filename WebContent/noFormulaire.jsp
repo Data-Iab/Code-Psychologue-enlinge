@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Pas de formulaire</title>
 </head>
 <link href="RHCSS.css" rel="stylesheet" type="text/css">
 
@@ -12,6 +12,6 @@
 <br>
 <br>
 <br>
-<h1 align ="center">Réponses envoyées avec succès</h1>
+<h1 align ="center">Pas de formulaire pour le moment</h1>
 </body>
 </html>

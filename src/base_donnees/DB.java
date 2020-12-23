@@ -1,16 +1,20 @@
 package base_donnees;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import java.sql.Statement;
+import java.util.ArrayList;
+
+
 import loginsession.*;
 public class DB {
 	private String dbUrl = "jdbc:mysql://localhost:3306/userdb?useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	private String dbUname = "root";
-	private String dbPassword = "0000";
+	private String dbPassword = "maria";
 	private String dbDriver = "com.mysql.cj.jdbc.Driver";
 	public void loadDriver(String dbDriver)
 	{
@@ -52,11 +56,11 @@ public class DB {
 	}
 	public void question_utilisateur(Session session, List<Question> userquestion)
 	{
-		boolean status;
-	
+		boolean status = false;
+
 		loadDriver(dbDriver);
 		Connection con = getConnection();
-		String sql = "SELECT * FROM userdb.questions q INNER JOIN userdb.formulaires f ON f.id_formulaire=q.id_formulaire WHERE f.nom=? AND f.etat=1 AND q.reponse is NULL";
+		String sql = "SELECT * FROM userdb.questions q INNER JOIN userdb.formulaires f ON f.id_formulaire=q.id_formulaire WHERE f.nom=?";
 		PreparedStatement ps;
 		try {
 		ps = con.prepareStatement(sql);
@@ -69,7 +73,7 @@ public class DB {
 			question.affectIdFormulaire(rs.getInt("id_formulaire"));
 			question.affectReponse(rs.getBoolean("reponse"));
 			question.affectQuestion(rs.getString("question"));
-	
+
 			userquestion.add(question);
 			status = rs.next();
 		}
@@ -77,32 +81,6 @@ public class DB {
 			e.printStackTrace();
 		}
 	}
-	
-	public void updateQuestion(int[] idQuestions, int[] reponses)
-	{
-		loadDriver(dbDriver);
-		Connection con = getConnection();
-		String sql = "UPDATE `userdb`.`questions` SET `reponse` = ? WHERE (`id_question` = ?);";
-		PreparedStatement ps;
-		try {
-			for(int j = 0 ; j < idQuestions.length ; j++) {
-				ps = con.prepareStatement(sql);
-				ps.setInt(1, reponses[j]);
-				ps.setInt(2, idQuestions[j]);
-				ps.executeUpdate();
-			}
-			
-			} catch (SQLException e) {
-				e.printStackTrace();
-		}
-	}
-	
-	
-	
-	
-	
-	
-	
 	public void liste_formulaire(Session session, List<Formulaire> RH) {
         Statement statement = null;
         ResultSet resultat = null;
@@ -115,17 +93,36 @@ public class DB {
             while (resultat.next()) {
                 String user = resultat.getString("nom");
                 String psy = resultat.getString("psychologue");
+                int id_formulaire = resultat.getInt("id_formulaire");
                 boolean etat = resultat.getBoolean("etat");
                 Formulaire formulaire = new Formulaire();
                 formulaire.setuser(user);
                 formulaire.affectetat(etat);
                 formulaire.setpsy(psy);
+                formulaire.affectIdFormulaire(id_formulaire);
                 RH.add(formulaire);
-            }
+                System.out.println(user);           }
         } catch (SQLException e) {
-          e.printStackTrace();
+          e.printStackTrace();}
             
         }
+       public void updateliste_formulaire(int[] id_formulaire, int[] etat) {
+    		loadDriver(dbDriver);
+    		Connection con = getConnection();
+    		String sql = "UPDATE `userdb`.`formulaires`  SET `etat` = ? WHERE (`id_formulaire` = ?);";
+    		PreparedStatement ps;
+    		try {
+    			for(int j = 0 ; j < id_formulaire.length ; j++) {
+    				ps = con.prepareStatement(sql);
+    				ps.setInt(1, etat[j]);
+    				ps.setInt(2, id_formulaire[j]);
+    				ps.executeUpdate();
+    			}
+    			} catch (SQLException e) {
+    				e.printStackTrace();
+    		}
+       
        
     }
+	
 }

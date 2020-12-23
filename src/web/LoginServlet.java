@@ -2,6 +2,8 @@ package web;
 
 import java.io.IOException;
 import java.util.*;
+import java.sql.SQLException;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +16,7 @@ import loginsession.*;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String nom = request.getParameter("nom");
 		String passe = request.getParameter("mot de passe");
@@ -27,33 +30,32 @@ public class LoginServlet extends HttpServlet {
 			response.sendRedirect("Pyschologue.jsp");
 		}
 		else if(session.returnType().equals("Utilisateur")) {
-			  List<Question> userquestion = new ArrayList<Question>();
-			  connexion_db.question_utilisateur(session, userquestion);
-			  if(userquestion.size() == 0)
-				  response.sendRedirect("noQuestions.jsp");
-			  else {
-				  request.setAttribute("userquestion", userquestion);
-				  request.setAttribute("utilisateur", session.returnNom());
-				  RequestDispatcher rst = request.getRequestDispatcher("Utilisateur.jsp");
-				  rst.forward(request, response);
-			  }
+			List<Question> userquestion = new ArrayList<Question>();
+			connexion_db.question_utilisateur(session, userquestion);
+			  request.setAttribute("userquestion", userquestion);
+			  RequestDispatcher rst = request.getRequestDispatcher("Utilisateur.jsp");
+			  rst.forward(request, response);
+			  
+			  
+		
 		}
 		else if(session.returnType().equals("RH")) {
 			List<Formulaire> RH = new ArrayList<Formulaire>();
 			connexion_db.liste_formulaire(session,RH);
+			if(RH.size() == 0)
+				response.sendRedirect("noFormulaire.jsp");
+			else {
 			request.setAttribute("RH", RH);
 			RequestDispatcher rst = request.getRequestDispatcher("RH.jsp");
-			rst.forward(request, response);
+			rst.forward(request, response);}
+		  
 			
 		}
 	}
 	else {
-		String loginfailed = "Identifiants incorrectes";
-		request.setAttribute("loginfailed", loginfailed);
-		RequestDispatcher rst = request.getRequestDispatcher("login.jsp");
-		rst.forward(request, response);
 		response.sendRedirect("login.jsp");
 	}
 	}
+ 
 
 }

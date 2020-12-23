@@ -15,6 +15,7 @@ public class Formulaire {
 	public String getpsy() {
 	        return psychologue;
 	    }
+	 
 	 public void setpsy(String psychologue) {
 	        this.psychologue = psychologue;
 	    }
@@ -24,6 +25,12 @@ public class Formulaire {
     public void affectetat(boolean etat) {
 			this.etat =etat;
 		}
-		
+	public void affectIdFormulaire(int id_formulaire) {
+        this.id_formulaire = id_formulaire;
+    }
+    
+	public int returnIdFormulaire() {
+        return id_formulaire;
+    }
 
 }

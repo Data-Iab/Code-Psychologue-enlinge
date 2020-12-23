@@ -8,6 +8,14 @@ h1{
 }
 
 
+input {
+  width: 50%;
+  border-radius: 10px;
+  padding: 30px 20px;
+
+}
+
+
 button {
   background-color: white;
   color: black;

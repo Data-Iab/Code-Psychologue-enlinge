@@ -5,7 +5,15 @@ public class Question {
 	public int id_formulaire;
 	public String questiontext;
 	public boolean reponse;
+	public String EtatQuestion;
 	
+	public void affectEtatQuestion(String EtatQuestion) {
+		this.EtatQuestion = EtatQuestion;
+	}
+	public String returnEtatQuestion() {
+		return EtatQuestion;
+	}
+		
 	public void affectIdQuestion(int id_question) {
 		this.id_question =id_question;
 	}
@@ -30,5 +38,4 @@ public class Question {
 	public void affectReponse(boolean reponse) {
 		this.reponse =reponse;
 	}
-	
 }

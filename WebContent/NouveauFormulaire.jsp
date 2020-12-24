@@ -34,11 +34,11 @@
 						<th></th>
 					</tr>
 				<tbody>
-					<c:forEach items="${QuestionText}" var="qst">
+					<c:forEach items="${QuestionText}" var="qst" varStatus="loop">
 						<tr>
 							<td><c:out value="${qst}" /></td>
 							<input type="hidden" name="AncienneQuestionText" value="${qst}" />
-							<td><button type="submit" class="supprimer">Supprimer</button></td>
+							<td><button type="submit" class="supprimer" name = "SupprimerButton" value= "${loop.index}">Supprimer</button></td>
 						</tr>
 					</c:forEach>
 				</tbody>

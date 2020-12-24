@@ -21,6 +21,9 @@ public class NouveauFormulaire extends HttpServlet {
 		List<String> QuestionText = new ArrayList<String>();
 		String NouvelleQuestion = request.getParameter("QuestionText");
 		String[] AnciennesQuestions = request.getParameterValues("AncienneQuestionText");
+		String Psychologue = request.getParameter("psy");
+		System.out.println(Psychologue);
+
 
 		try {
 			for (String q : AnciennesQuestions) {
@@ -36,12 +39,25 @@ public class NouveauFormulaire extends HttpServlet {
 
 		try {
 			int element_supprimer = Integer.parseInt(request.getParameter("SupprimerButton"));
-			System.out.println(element_supprimer);
 			QuestionText.remove(element_supprimer);
 		} catch (Exception e) {
 			;
 		}
 
+		String action = request.getParameter("Formulaire_envoyer");
+		
+		if((action != null) &&(QuestionText.size() > 0)) {
+			String Destinatiare = request.getParameter("Destinataire");
+			
+			connexion_db.EntrerFormulaireEtQuestions("DDD", Destinatiare, QuestionText);
+			
+			while(QuestionText.size()>0) {
+				QuestionText.remove(0);
+			}
+			
+		}
+		
+		
 		List<String> Destinataires = connexion_db.liste_destinataires();
 		request.setAttribute("Destinataires", Destinataires);
 		request.setAttribute("QuestionText", QuestionText);

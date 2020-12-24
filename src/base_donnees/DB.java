@@ -221,4 +221,57 @@ public class DB {
 		return liste;
 	}
 
+	public void EntrerFormulaireEtQuestions(String Psychologue, String Utilisateur, List<String> QuestionText) {
+		loadDriver(dbDriver);
+		Connection con = getConnection();
+		String sqlFormulaire = "INSERT INTO `userdb`.`formulaires` (`id_formulaire`, `nom`, `psychologue`, `etat`) VALUES (?, ?, ?, '0')";
+		String maxIdFormulaire = "SELECT max(userdb.formulaires.id_formulaire) AS 'maxIdFormulaire' FROM userdb.formulaires";
+		String sqlQuestion = "INSERT INTO `userdb`.`questions` (`id_question`, `id_formulaire`, `question`) VALUES (?, ?, ?)";
+		String maxIdQuestion = "SELECT max(userdb.questions.id_question) AS 'maxIdQuetion' FROM userdb.questions";
+		int IdFormulaire = 0;
+		int IdQuestion = 0;
+		PreparedStatement ps;
+		try {
+			ps = con.prepareStatement(maxIdFormulaire);
+			ResultSet resultat = ps.executeQuery();
+			if (resultat.next())
+				IdFormulaire = resultat.getInt("maxIdFormulaire") + 1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			ps = con.prepareStatement(maxIdQuestion);
+			ResultSet resultat = ps.executeQuery();
+			if (resultat.next())
+				IdQuestion = resultat.getInt("maxIdQuetion") + 1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			ps = con.prepareStatement(sqlFormulaire);
+			ps.setInt(1, IdFormulaire);
+			ps.setString(2, Utilisateur);
+			ps.setString(3, Psychologue);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			int i = 0;
+			for (String question : QuestionText) {
+				ps = con.prepareStatement(sqlQuestion);
+				ps.setInt(1, IdQuestion + i);
+				ps.setInt(2, IdFormulaire);
+				ps.setString(3, question);
+				ps.executeUpdate();
+				i++;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 }

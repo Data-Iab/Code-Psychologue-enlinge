@@ -35,13 +35,8 @@
 						</tr>
 					</c:forEach>
 				</tbody>
-				<thead>
-					<tr>
-						<td></td>
-						<th align=center><button type="submit">Envoyer</button></th>
-					</tr>
-				</thead>
 			</table>
+			<h1 align=center><button type="submit">Envoyer</button></h1>
 		</div>
 	</form>
 </body>

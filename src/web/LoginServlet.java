@@ -33,8 +33,8 @@ public class LoginServlet extends HttpServlet {
 				request.setAttribute("psy", session.returnNom());
 				request.setAttribute("userquestion", userquestion);
 				request.setAttribute("formulaires", formulaires);
-				RequestDispatcher rst = request.getRequestDispatcher("Psychologue.jsp");
-				rst.forward(request, response);
+				request.getRequestDispatcher("Psychologue.jsp").forward(request, response);
+				
 
 			} else if (session.returnType().equals("Utilisateur")) {
 				List<Question> userquestion = new ArrayList<Question>();

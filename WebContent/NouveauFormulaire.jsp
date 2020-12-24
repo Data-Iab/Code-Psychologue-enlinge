@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Nouveau formulaire</title>
+<title>${psy}</title>
 </head>
 <link href="NouveauFormulaireCSS.css" rel="stylesheet">
 <body>
@@ -19,7 +19,7 @@
 						<th>Destinataire</th>
 						<th><select name="Destinataire" class="dropbtn">
 								<c:forEach items="${Destinataires}" var="Dest">
-									<option value="dest">${Dest}</option>
+									<option value="${Dest}">${Dest}</option>
 								</c:forEach>
 						</select></th>
 					</tr>
@@ -34,6 +34,7 @@
 						<th></th>
 					</tr>
 				<tbody>
+				
 					<c:forEach items="${QuestionText}" var="qst" varStatus="loop">
 						<tr>
 							<td><c:out value="${qst}" /></td>
@@ -41,14 +42,11 @@
 							<td><button type="submit" class="supprimer" name = "SupprimerButton" value= "${loop.index}">Supprimer</button></td>
 						</tr>
 					</c:forEach>
+				
 				</tbody>
-
-				<tr>
-					<td></td>
-					<th align=center><button type="submit">Envoyer</button></th>
-				</tr>
-				</thead>
+				
 			</table>
+			<h1 align=center><button type="submit" name="Formulaire_envoyer" value="Envoyer">Envoyer</button></h1>
 		</div>
 	</form>
 </body>

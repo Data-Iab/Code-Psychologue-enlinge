@@ -2,6 +2,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
+<jsp:include file="jsp1.jsp"/>
 <head>
 <meta charset="ISO-8859-1">
 <title>Psychologue ${psy}</title>

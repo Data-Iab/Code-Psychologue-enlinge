@@ -21,10 +21,10 @@ public class NouveauFormulaire extends HttpServlet {
 		List<String> QuestionText = new ArrayList<String>();
 		String NouvelleQuestion = request.getParameter("QuestionText");
 		String[] AnciennesQuestions = request.getParameterValues("AncienneQuestionText");
-		String Psychologue = request.getParameter("psy");
+		String Psychologue = request.getParameter("Psychologue");
+		String action = request.getParameter("Formulaire_envoyer");
+		List<String> Destinataires = connexion_db.liste_destinataires();
 		System.out.println(Psychologue);
-
-
 		try {
 			for (String q : AnciennesQuestions) {
 				QuestionText.add(q);
@@ -44,26 +44,17 @@ public class NouveauFormulaire extends HttpServlet {
 			;
 		}
 
-		String action = request.getParameter("Formulaire_envoyer");
-		
 		if((action != null) &&(QuestionText.size() > 0)) {
 			String Destinatiare = request.getParameter("Destinataire");
-			
-			connexion_db.EntrerFormulaireEtQuestions("DDD", Destinatiare, QuestionText);
-			
-			while(QuestionText.size()>0) {
+			connexion_db.EntrerFormulaireEtQuestions(Psychologue, Destinatiare, QuestionText);
+			while(QuestionText.size() > 0) {
 				QuestionText.remove(0);
 			}
-			
 		}
-		
-		
-		List<String> Destinataires = connexion_db.liste_destinataires();
 		request.setAttribute("Destinataires", Destinataires);
 		request.setAttribute("QuestionText", QuestionText);
+		request.setAttribute("psy", Psychologue);
 		RequestDispatcher rst = request.getRequestDispatcher("NouveauFormulaire.jsp");
 		rst.forward(request, response);
-
 	}
-
 }

@@ -2,9 +2,9 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
-<jsp:include file="jsp1.jsp"/>
 <head>
 <meta charset="ISO-8859-1">
+<input type="hidden" name="Psychologue" value="${psy}" />
 <title>Psychologue ${psy}</title>
 </head>
 <link href="UtilisateurCSS.css" rel="stylesheet" type="text/css">
@@ -14,6 +14,7 @@
 	<h1 align="center">
 		<button type="submit">Nouveau formulaire</button>
 	</h1>
+	<input type="hidden" name="Psychologue" value="${psy}" />
 	</form>
 	<c:forEach items="${formulaires}" var="formulaire">
 		<div class="container">
@@ -21,7 +22,7 @@
 				<thead>
 					<tr>
 						<th><c:out value="${formulaire.getuser()}" /></th>
-						<th>reponses</th>
+						<th>Reponses</th>
 					</tr>
 				</thead>
 				<tbody>

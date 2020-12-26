@@ -81,16 +81,16 @@ public class DB {
 		}
 	}
 
-	public void question_utilisateur_psychologue(String nomUtilisateur, List<Question> userquestion) {
+	public void question_utilisateur_psychologue(String Psychologue, List<Question> userquestion) {
 		boolean status;
-
+	
 		loadDriver(dbDriver);
 		Connection con = getConnection();
-		String sql = "SELECT * FROM userdb.questions q INNER JOIN userdb.formulaires f ON f.id_formulaire=q.id_formulaire WHERE f.nom=?";
+		String sql = "SELECT * FROM userdb.questions q INNER JOIN userdb.formulaires f ON f.id_formulaire=q.id_formulaire WHERE f.psychologue=?";
 		PreparedStatement ps;
 		try {
 			ps = con.prepareStatement(sql);
-			ps.setString(1, nomUtilisateur);
+			ps.setString(1, Psychologue);
 			ResultSet rs = ps.executeQuery();
 			status = rs.next();
 			while (status) {
@@ -146,7 +146,6 @@ public class DB {
 				formulaire.setpsy(psy);
 				formulaire.affectIdFormulaire(id_formulaire);
 				RH.add(formulaire);
-				System.out.println(user);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -173,12 +172,12 @@ public class DB {
 	}
 
 	public void liste_formulaire_psychologue(String nom, List<Formulaire> formulaires) {
-
+	
 		loadDriver(dbDriver);
 		PreparedStatement ps;
 		Connection con = getConnection();
 		String sql = "SELECT * FROM userdb.formulaires f where f.psychologue = ?";
-
+	
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setString(1, nom);
@@ -197,7 +196,7 @@ public class DB {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-
+	
 		}
 	}
 
@@ -217,7 +216,7 @@ public class DB {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
+	
 		return liste;
 	}
 

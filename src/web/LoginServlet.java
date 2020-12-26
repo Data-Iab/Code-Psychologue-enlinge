@@ -26,14 +26,16 @@ public class LoginServlet extends HttpServlet {
 			if (session.returnType().equals("Psychologue")) {
 				List<Formulaire> formulaires = new ArrayList<Formulaire>();
 				List<Question> userquestion = new ArrayList<Question>();
+				
 				connexion_db.liste_formulaire_psychologue(session.returnNom(), formulaires);
-				for (Formulaire f : formulaires) {
-					connexion_db.question_utilisateur_psychologue(f.getuser(), userquestion);
-				}
+				connexion_db.question_utilisateur_psychologue(session.returnNom(), userquestion);
+				
 				request.setAttribute("psy", session.returnNom());
 				request.setAttribute("userquestion", userquestion);
 				request.setAttribute("formulaires", formulaires);
-				request.getRequestDispatcher("Psychologue.jsp").forward(request, response);
+				RequestDispatcher rst = request.getRequestDispatcher("Psychologue.jsp");
+				rst.forward(request, response);
+				
 				
 
 			} else if (session.returnType().equals("Utilisateur")) {

@@ -9,7 +9,7 @@ h1{
 
 
 .supprimer{
-	background-color: red;	
+	background-color: rgb(128, 255, 128)(128, 128, 255);	
 }
 
 input {
@@ -68,7 +68,7 @@ button:hover {
   color: #ffffff;
   padding: 10px 30px;
   font-size: 15px;
-  border: none;
+  border: white;
   cursor: pointer;
 }
 body {

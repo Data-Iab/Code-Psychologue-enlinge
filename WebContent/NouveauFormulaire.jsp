@@ -4,11 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>${psy}</title>
+<title>Nouveau Formulaire</title>
 </head>
 <link href="NouveauFormulaireCSS.css" rel="stylesheet">
 <body>
 	<form action="NouveauFormulaire" method="post">
+	<input type="hidden" name="Psychologue" value="${psy}" />
 		<br> <br>
 		<h1 align=center>Nouveau formulaire</h1>
 		<br> <br>
@@ -34,19 +35,19 @@
 						<th></th>
 					</tr>
 				<tbody>
-				
+
 					<c:forEach items="${QuestionText}" var="qst" varStatus="loop">
 						<tr>
 							<td><c:out value="${qst}" /></td>
 							<input type="hidden" name="AncienneQuestionText" value="${qst}" />
-							<td><button type="submit" class="supprimer" name = "SupprimerButton" value= "${loop.index}">Supprimer</button></td>
+							<td><button type="submit" class="supprimer" name="SupprimerButton" value="${loop.index}">Supprimer</button></td>
 						</tr>
 					</c:forEach>
-				
 				</tbody>
-				
 			</table>
-			<h1 align=center><button type="submit" name="Formulaire_envoyer" value="Envoyer">Envoyer</button></h1>
+			<h1 align=center>
+				<button type="submit" name="Formulaire_envoyer" value="Envoyer">Envoyer</button>
+			</h1>
 		</div>
 	</form>
 </body>

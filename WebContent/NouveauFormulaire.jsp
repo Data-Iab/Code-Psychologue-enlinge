@@ -6,11 +6,19 @@
 <meta charset="UTF-8">
 <title>Nouveau Formulaire</title>
 </head>
-<link href="NouveauFormulaireCSS.css" rel="stylesheet">
+<link href="NouveauFormulaireCSS.css" rel="stylesheet" type="text/css">
 <body>
+
+<form action="login" method="post">
+	<button type="submit" class="logout">Logout</button>
+</form>
+<form class=login action="login" method="get">
+	<button type="submit" class="logout">Retour</button>
+	<input type="hidden" name="nom" value="${psy}" />
+</form>
+
 	<form action="NouveauFormulaire" method="post">
-	<input type="hidden" name="Psychologue" value="${psy}" />
-		<br> <br>
+		<input type="hidden" name="Psychologue" value="${psy}" /> <br> <br>
 		<h1 align=center>Nouveau formulaire</h1>
 		<br> <br>
 		<div>
@@ -40,13 +48,14 @@
 						<tr>
 							<td><c:out value="${qst}" /></td>
 							<input type="hidden" name="AncienneQuestionText" value="${qst}" />
-							<td><button type="submit" class="supprimer" name="SupprimerButton" value="${loop.index}">Supprimer</button></td>
+							<td><button type="submit" class="supprimer"
+									name="SupprimerButton" value="${loop.index}">Supprimer</button></td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 			<h1 align=center>
-				<button type="submit" name="Formulaire_envoyer" value="Envoyer">Envoyer</button>
+				<button type="submit" name="Formulaire_envoyer" value="Envoyer" onclick="alert('Voulez vous vraiment envoyer ce formulaire ?.')">Envoyer</button>
 			</h1>
 		</div>
 	</form>

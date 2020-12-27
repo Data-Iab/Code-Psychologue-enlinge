@@ -9,6 +9,9 @@
 </head>
 <link href="UtilisateurCSS.css" rel="stylesheet" type="text/css">
 <body>
+<form action="login" method="post">
+<button type="submit" class='ButtonA'>Logout</button>
+</form>
 	<br>
 	<form action="NouveauFormulaire" method="post">
 	<h1 align="center">
@@ -35,7 +38,6 @@
 							<input type="hidden" name="idQuestion" value="${question.returnIdQuestion()}" />
 							<td>
 								<c:choose>
-								
 								<c:when test="${formulaire.returnetat()}">
 									<c:choose>
 										<c:when test="${question.returnEtatQuestion() == null}">

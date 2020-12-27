@@ -16,6 +16,14 @@ input {
 }
 
 
+
+.ButtonA:hover {
+	color: FDE47F;
+	background: 7CCCE5;
+}
+
+
+
 button {
   background-color: white;
   color: black;
@@ -67,6 +75,9 @@ th {
   font-weight: 600;
   padding: 0.5em 1em;
   text-align: Left;
+  border: 1px solid black;
+  width: 100px;
+  overflow: hidden;
 }
 td {
   color: #fff;
@@ -81,4 +92,17 @@ tbody tr {
 }
 tbody tr:hover {
   background: #014055;
+}
+.ButtonA {
+	background-color: 333E7B;
+	border-radius: 5px;
+	border: 5px solid #B7D96B;
+	box-shadow: rgba(0, 0, 0, 0.2) 0 1px 0 0;
+	color: #8576AD;
+	font-family: 'Helvetica Neue', Arial, sans-serif;;
+	font-size: 16px;
+	font-weight: 700;
+	height: 32px;
+	padding: 4px 16px;
+	text-decoration: none;
 }

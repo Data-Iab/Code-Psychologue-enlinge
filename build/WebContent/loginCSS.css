@@ -1,0 +1,47 @@
+button {
+  background-color: while;
+  color: black;
+  padding: 14px 20px;
+  border-radius: 10px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+input[type=text], input[type=password] {
+  width: 100%;
+  border-radius: 10px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+button:hover {
+  opacity: 0.8;
+  background-color: black;
+  color: white;
+}
+
+body {
+ background-image: url("1.gif");
+ background-attachment: fixed;
+ background-repeat: no-repeat;
+ background-position: center;
+ background-size: cover;
+ background-color: white;
+}
+.error{
+	color : red;
+}
+
+.login {
+  overflow: hidden;
+  opacity: 0.8;
+  background-color: #8e8e8e;
+  padding: 20px 30px 30px 30px;
+  border-radius: 10px;
+  top:100px;
+  width: 400px;
+  box-shadow: 5px 10px 10px rgba(green, 0.2);
+}

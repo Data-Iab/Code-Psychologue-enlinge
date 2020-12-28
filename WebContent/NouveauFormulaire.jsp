@@ -4,21 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Nouveau Formulaire</title>
+<title>Nouveau formulaire</title>
 </head>
-<link href="NouveauFormulaireCSS.css" rel="stylesheet" type="text/css">
+<link href="NouveauFormulaireCSS.css" rel="stylesheet">
 <body>
-
-<form action="login" method="post">
-	<button type="submit" class="logout">Logout</button>
-</form>
-<form class=login action="login" method="get">
-	<button type="submit" class="logout">Retour</button>
-	<input type="hidden" name="nom" value="${psy}" />
-</form>
-
 	<form action="NouveauFormulaire" method="post">
-		<input type="hidden" name="Psychologue" value="${psy}" /> <br> <br>
+		<br> <br>
 		<h1 align=center>Nouveau formulaire</h1>
 		<br> <br>
 		<div>
@@ -28,7 +19,7 @@
 						<th>Destinataire</th>
 						<th><select name="Destinataire" class="dropbtn">
 								<c:forEach items="${Destinataires}" var="Dest">
-									<option value="${Dest}">${Dest}</option>
+									<option value="dest">${Dest}</option>
 								</c:forEach>
 						</select></th>
 					</tr>
@@ -43,20 +34,21 @@
 						<th></th>
 					</tr>
 				<tbody>
-
-					<c:forEach items="${QuestionText}" var="qst" varStatus="loop">
+					<c:forEach items="${QuestionText}" var="qst">
 						<tr>
 							<td><c:out value="${qst}" /></td>
 							<input type="hidden" name="AncienneQuestionText" value="${qst}" />
-							<td><button type="submit" class="supprimer"
-									name="SupprimerButton" value="${loop.index}">Supprimer</button></td>
+							<td><button type="submit" class="supprimer">Supprimer</button></td>
 						</tr>
 					</c:forEach>
 				</tbody>
+
+				<tr>
+					<td></td>
+					<th align=center><button type="submit">Envoyer</button></th>
+				</tr>
+				</thead>
 			</table>
-			<h1 align=center>
-				<button type="submit" name="Formulaire_envoyer" value="Envoyer" onclick="alert('Voulez vous vraiment envoyer ce formulaire ?.')">Envoyer</button>
-			</h1>
 		</div>
 	</form>
 </body>

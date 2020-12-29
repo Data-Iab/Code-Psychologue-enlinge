@@ -1,48 +1,14 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
-
-
 h1{
 	 font-size: 20px;
 	 font-family: 'Courier New';
 	 color : white;
 }
-
-
-.supprimer{
-	background-color: red;	
-}
-
-input {
-  width: 100%;
-  border-radius: 10px;
-  padding: 12px 50px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-}
-
-
-
-button [mode="supprimer"]{
-  background-color: white;
-  color: black;
-  display:inline-block;
-  padding: 10px 20px;
-  border-radius: 10px;
-  font-size: 20px;
-  margin: 30px 0;
-  border: none;
-  cursor: pointer;
-  display: inline-block;
-  transition: all 0.25s;
-}
-
 button {
   background-color: white;
   color: black;
   display:inline-block;
-  padding: 10px 20px;
+  padding: 10px 30px;
   border-radius: 10px;
   font-size: 20px;
   margin: 30px 0;

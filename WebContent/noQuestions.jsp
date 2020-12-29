@@ -9,9 +9,15 @@
 <link href="UtilisateurCSS.css" rel="stylesheet" type="text/css">
 
 <body>
+<h1 align=center>
+<form action="login" method="post">
+	<button type="submit" class="boutonHaut">Logout</button>
+</form>
+</h1>
 <br>
 <br>
 <br>
 <h1 align ="center">Pas de questions pour le moment</h1>
+
 </body>
 </html>

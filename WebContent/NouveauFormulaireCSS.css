@@ -2,15 +2,22 @@
 
 
 h1{
-	 font-size: 20px;
-	 font-family: 'Courier New';
-	 color : white;
+  text-align:center;
+  font-size:1em; 
+  font-weight: 300;
+  display: block;
+  line-height:1em;
+  padding-bottom: 2em;
+  color: #FB667A;
 }
 
-
-.supprimer{
-	background-color: red;	
+.file {
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  position: absolute;
 }
+
 
 input {
   width: 100%;
@@ -22,30 +29,85 @@ input {
   box-sizing: border-box;
 }
 
-
-
-button [mode="supprimer"]{
-  background-color: white;
-  color: black;
+.boutonHaut{
+  background-color: black;
+  color: white;
   display:inline-block;
-  padding: 10px 20px;
+  padding: 7px 25px;
   border-radius: 10px;
-  font-size: 20px;
-  margin: 30px 0;
+  font-size: 10px;
+  margin: 10px 0;
   border: none;
   cursor: pointer;
   display: inline-block;
   transition: all 0.25s;
 }
 
-button {
+.boutonHaut:hover {
+  opacity: 0.8;
+  background-color: #ffffff;
+  color: black;
+}
+
+select {
   background-color: white;
+  color: black;
+  padding: 10px 17px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  
+}
+
+.supprimer{
+  background-color: #dadada;
   color: black;
   display:inline-block;
   padding: 10px 20px;
   border-radius: 10px;
-  font-size: 20px;
-  margin: 30px 0;
+  font-size: 15px;
+  margin: 10px 0;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  transition: all 0.25s;
+}
+.supprimer:hover {
+  opacity: 0.8;
+  background-color: #aa0000;
+  color: #ffffff;
+}
+
+.file-input label {
+  display: block;
+  position: relative;
+  padding: 7px 25px;
+  border-radius: 10px;
+  background: white;
+  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.file-input label:hover{
+  opacity: 0.8;
+  background-color: #E2B842;
+  color: white;
+	
+	}
+button {
+  background-color: white;
+  color: black;
+  display:inline-block;
+  padding: 10px 30px;
+  border-radius: 10px;
+  font-size: 15px;
+  margin: 10px 0;
   border: none;
   cursor: pointer;
   display: inline-block;
@@ -63,24 +125,18 @@ button:hover {
   padding: 0;
   box-sizing: border-box;
 }
-.dropbtn {
-  background-color: #012B39;
-  color: #ffffff;
-  padding: 10px 30px;
-  font-size: 15px;
-  border: none;
-  cursor: pointer;
-}
+
 body {
   background: #105469;
   font-family: 'Open Sans', sans-serif;
 }
 table {
-  width: 70%;
+  width: 80%;
   background: #012B39;
   border-radius: 0.25em;
   border-collapse: collapse;
-  margin: 1em;
+  margin-right: auto;
+  margin-left: auto;
 }
 th {
   border-bottom: 1px solid #364043;
@@ -89,17 +145,22 @@ th {
   font-weight: 600;
   padding: 0.5em 1em;
   text-align: Left;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  
 }
 td {
   color: #fff;
   font-weight: 400;
   padding: 0.65em 1em;
+  overflow: hidden;
 }
 .disabled td {
   color: #4F5F64;
 }
 tbody tr {
   transition: background 0.25s ease;
+  
 }
 tbody tr:hover {
   background: #014055;

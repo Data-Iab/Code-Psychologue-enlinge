@@ -9,14 +9,20 @@
 </head>
 <link href="UtilisateurCSS.css" rel="stylesheet" type="text/css">
 <body>
+<h1 align=center>
+<form action="login" method="post">
+	<button type="submit" class="boutonHaut">Logout</button>
+</form>
+</h1>
 	<form action="utilisateur" method="post">
 		<br>
 		<br>
+		<c:if test="${userquestion.size()>0}">
 		<h1 align=center>Veuillez répondre aux questions suivantes</h1>
 		<br>
 		<br>
-		<div class="container">
-			<table align=center>
+		
+			<table>
 				<thead>
 					<tr>
 						<th>Question</th>
@@ -35,14 +41,25 @@
 						</tr>
 					</c:forEach>
 				</tbody>
+			</table>
+			<h1 align=center><button type="submit">Envoyer</button></h1>
+			</c:if>
+			<c:if test="${recommendations.size()>0}">
+			<table>
 				<thead>
 					<tr>
-						<td></td>
-						<th align=center><button type="submit">Envoyer</button></th>
+						<th>Recommendations</th>
 					</tr>
 				</thead>
+				<tbody>
+					<c:forEach items="${recommendations}" var="req">
+						<tr>
+							<td><c:out value="${req}" /></td>
+						</tr>
+					</c:forEach>
+				</tbody>
 			</table>
-		</div>
+			</c:if>
 	</form>
 </body>
 </html>

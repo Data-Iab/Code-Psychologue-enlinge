@@ -7,6 +7,53 @@ h1{
 	 color : white;
 }
 
+.dot {
+  height: 25px;
+  width: 25px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+
+.red{
+  background-color: red;
+  color: white;
+  display:inline-block;
+  padding: 7px 7px;
+  border-radius: 30%;
+  font-size: 10px;
+  margin: 10px 0;
+}
+.green{
+  background-color: green;
+  color: white;
+  display:inline-block;
+  padding: 7px 7px;
+  border-radius: 30%;
+  font-size: 10px;
+  margin: 10px 0;
+}
+
+.boutonHaut{
+  background-color: black;
+  color: white;
+  display:inline-block;
+  padding: 7px 25px;
+  border-radius: 10px;
+  font-size: 10px;
+  margin: 10px 0;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  transition: all 0.25s;
+}
+
+.boutonHaut:hover {
+  opacity: 0.8;
+  background-color: #ffffff;
+  color: black;
+}
 
 input {
   width: 50%;
@@ -14,6 +61,14 @@ input {
   padding: 30px 20px;
 
 }
+
+
+
+.ButtonA:hover {
+	color: FDE47F;
+	background: 7CCCE5;
+}
+
 
 
 button {
@@ -54,12 +109,15 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 table {
-  width: 70%;
+  width: 80%;
   background: #012B39;
   border-radius: 0.25em;
   border-collapse: collapse;
-  margin: 1em;
+  margin-right: auto;
+  margin-left: auto;
 }
+
+
 th {
   border-bottom: 1px solid #364043;
   color: #E2B842;
@@ -67,6 +125,7 @@ th {
   font-weight: 600;
   padding: 0.5em 1em;
   text-align: Left;
+
 }
 td {
   color: #fff;
@@ -76,9 +135,25 @@ td {
 .disabled td {
   color: #4F5F64;
 }
+
 tbody tr {
   transition: background 0.25s ease;
+  margin-right: auto;
+  margin-left: auto;
 }
 tbody tr:hover {
   background: #014055;
+}
+.ButtonA {
+	background-color: 333E7B;
+	border-radius: 5px;
+	border: 5px solid #B7D96B;
+	box-shadow: rgba(0, 0, 0, 0.2) 0 1px 0 0;
+	color: #8576AD;
+	font-family: 'Helvetica Neue', Arial, sans-serif;;
+	font-size: 16px;
+	font-weight: 700;
+	height: 32px;
+	padding: 4px 16px;
+	text-decoration: none;
 }

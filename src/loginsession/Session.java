@@ -1,6 +1,5 @@
 package loginsession;
 
-import java.util.*; 
 public class Session {
 	private String nom;
 	private String passe;

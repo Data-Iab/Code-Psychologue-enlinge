@@ -80,17 +80,76 @@ public class DB {
 			e.printStackTrace();
 		}
 	}
-
-	public void question_utilisateur_psychologue(String nomUtilisateur, List<Question> userquestion) {
+	
+	public void recommendations_utilisateur(String nomUtilisateur, List<String> recommendations) {
 		boolean status;
 
 		loadDriver(dbDriver);
 		Connection con = getConnection();
-		String sql = "SELECT * FROM userdb.questions q INNER JOIN userdb.formulaires f ON f.id_formulaire=q.id_formulaire WHERE f.nom=?";
+		String sql = "SELECT * FROM userdb.recommendations WHERE nom=?";
 		PreparedStatement ps;
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setString(1, nomUtilisateur);
+			ResultSet rs = ps.executeQuery();
+			status = rs.next();
+			while (status) {
+				recommendations.add(rs.getString("recommendation"));
+				status = rs.next();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	
+	
+	public void question_utilisateur_par_id(String nomUtilisateur, int id_formulaire, List<Question> userquestion) {
+		boolean status;
+
+		loadDriver(dbDriver);
+		Connection con = getConnection();
+		String sql = "SELECT * FROM userdb.questions q INNER JOIN userdb.formulaires f ON f.id_formulaire=q.id_formulaire WHERE f.nom=? AND q.reponse is NULL AND f.id_formulaire = ?";
+		PreparedStatement ps;
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, nomUtilisateur);
+			ps.setInt(2, id_formulaire);
+			ResultSet rs = ps.executeQuery();
+			status = rs.next();
+			while (status) {
+				Question question = new Question();
+				question.affectIdQuestion(rs.getInt("id_question"));
+				question.affectIdFormulaire(rs.getInt("id_formulaire"));
+				question.affectReponse(rs.getBoolean("reponse"));
+				question.affectQuestion(rs.getString("question"));
+
+				userquestion.add(question);
+				status = rs.next();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	
+	
+	
+
+	public void question_utilisateur_psychologue(String Psychologue, List<Question> userquestion) {
+		boolean status;
+	
+		loadDriver(dbDriver);
+		Connection con = getConnection();
+		String sql = "SELECT * FROM userdb.questions q INNER JOIN userdb.formulaires f ON f.id_formulaire=q.id_formulaire WHERE f.psychologue=?";
+		PreparedStatement ps;
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, Psychologue);
 			ResultSet rs = ps.executeQuery();
 			status = rs.next();
 			while (status) {
@@ -146,7 +205,6 @@ public class DB {
 				formulaire.setpsy(psy);
 				formulaire.affectIdFormulaire(id_formulaire);
 				RH.add(formulaire);
-				System.out.println(user);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -173,12 +231,12 @@ public class DB {
 	}
 
 	public void liste_formulaire_psychologue(String nom, List<Formulaire> formulaires) {
-
+	
 		loadDriver(dbDriver);
 		PreparedStatement ps;
 		Connection con = getConnection();
 		String sql = "SELECT * FROM userdb.formulaires f where f.psychologue = ?";
-
+	
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setString(1, nom);
@@ -197,7 +255,7 @@ public class DB {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-
+	
 		}
 	}
 
@@ -217,8 +275,102 @@ public class DB {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
+	
 		return liste;
 	}
+
+	public void EntrerFormulaireEtQuestions(String Psychologue, String Utilisateur, List<String> QuestionText) {
+		loadDriver(dbDriver);
+		Connection con = getConnection();
+		String sqlFormulaire = "INSERT INTO `userdb`.`formulaires` (`id_formulaire`, `nom`, `psychologue`, `etat`) VALUES (?, ?, ?, '0')";
+		String maxIdFormulaire = "SELECT max(userdb.formulaires.id_formulaire) AS 'maxIdFormulaire' FROM userdb.formulaires";
+		String sqlQuestion = "INSERT INTO `userdb`.`questions` (`id_question`, `id_formulaire`, `question`) VALUES (?, ?, ?)";
+		String maxIdQuestion = "SELECT max(userdb.questions.id_question) AS 'maxIdQuetion' FROM userdb.questions";
+		int IdFormulaire = 0;
+		int IdQuestion = 0;
+		PreparedStatement ps;
+		try {
+			ps = con.prepareStatement(maxIdFormulaire);
+			ResultSet resultat = ps.executeQuery();
+			if (resultat.next())
+				IdFormulaire = resultat.getInt("maxIdFormulaire") + 1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			ps = con.prepareStatement(maxIdQuestion);
+			ResultSet resultat = ps.executeQuery();
+			if (resultat.next())
+				IdQuestion = resultat.getInt("maxIdQuetion") + 1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			ps = con.prepareStatement(sqlFormulaire);
+			ps.setInt(1, IdFormulaire);
+			ps.setString(2, Utilisateur);
+			ps.setString(3, Psychologue);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			int i = 0;
+			for (String question : QuestionText) {
+				ps = con.prepareStatement(sqlQuestion);
+				ps.setInt(1, IdQuestion + i);
+				ps.setInt(2, IdFormulaire);
+				ps.setString(3, question);
+				ps.executeUpdate();
+				i++;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	
+	public void EntrerRecommendation(String Utilisateur, List<String> RecommendationText) {
+		loadDriver(dbDriver);
+		Connection con = getConnection();
+		String sqlRecommendation = "INSERT INTO `userdb`.`recommendations` (`idrecommendations`, `nom`, `recommendation`) VALUES (?, ?, ?)";
+		String maxIdrecommendation = "SELECT max(userdb.recommendations.idrecommendations) AS 'maxidrecommendations' FROM userdb.recommendations";
+		
+		int Idrecommendation = 0;
+		PreparedStatement ps;
+		try {
+			ps = con.prepareStatement(maxIdrecommendation);
+			ResultSet resultat = ps.executeQuery();
+			if (resultat.next())
+				Idrecommendation = resultat.getInt("maxIdFormulaire") + 1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			int i = 0;
+			for (String recommendation : RecommendationText) {
+				ps = con.prepareStatement(sqlRecommendation);
+				ps.setInt(1, Idrecommendation + i);
+				ps.setString(2, Utilisateur);
+				ps.setString(3, recommendation);
+				ps.executeUpdate();
+				i++;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	
+	
+	
 
 }

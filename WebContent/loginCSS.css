@@ -24,12 +24,8 @@ button:hover {
 }
 
 body {
- background-image: url("1.gif");
- background-attachment: fixed;
- background-repeat: no-repeat;
- background-position: center;
- background-size: cover;
- background-color: white;
+  background: #105469;
+  font-family: 'Open Sans', sans-serif;
 }
 .error{
 	color : red;
